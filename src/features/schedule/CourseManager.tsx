@@ -129,8 +129,8 @@ export default function CourseManager({ showDrop }: { showDrop: boolean }) {
             keyboardShouldPersistTaps="handled"
             ListEmptyComponent={
               <Text style={[type.sub, { padding: space.md }]}>
-                Nothing found. The seeded catalog covers a subset of subjects — re-run the
-                scraper for full coverage (README).
+                No classes match that search. Try the course code (COMS W3157), the number
+                alone (3157), or the call number.
               </Text>
             }
             renderItem={({ item }) => (
@@ -178,8 +178,8 @@ export default function CourseManager({ showDrop }: { showDrop: boolean }) {
           }
           ListEmptyComponent={
             <Text style={type.sub}>
-              Search above to add your classes — you’ll be dropped into each section’s group
-              chat automatically.
+              Search above to add your classes. You’ll join each section’s group chat
+              automatically.
             </Text>
           }
           renderItem={({ item }) => {

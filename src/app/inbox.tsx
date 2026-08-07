@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -68,7 +69,7 @@ export default function Inbox() {
     return (
       <>
         <Empty
-          icon="🔔"
+          icon="notifications-outline"
           title="Nothing yet"
           body="Friend requests, matches, and announcements land here."
         />
@@ -95,7 +96,7 @@ export default function Inbox() {
               <Avatar uri={item.actor_photo} name={item.actor_name} size={44} />
             </Pressable>
           ) : (
-            <Text style={{ fontSize: 28 }}>📣</Text>
+            <Ionicons name="megaphone-outline" size={26} color={colors.primary} />
           )}
           <View style={{ flex: 1, gap: space.sm }}>
             <Text style={type.body}>{item.body}</Text>
@@ -130,7 +131,7 @@ export default function Inbox() {
             )}
             {item.kind === 'friend_request' && item.request_status === 'accepted' && (
               <Text style={[type.sub, { color: colors.success }]}>
-                Accepted ✓
+                Accepted
               </Text>
             )}
             {(item.kind === 'new_match' || item.kind === 'request_accepted') && item.entity_id && (

@@ -1,4 +1,5 @@
 // Shared primitives. Additive only (PLAN §7 rule 3).
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import {
@@ -109,13 +110,29 @@ export function Avatar({
   );
 }
 
-export function Empty({ icon, title, body }: { icon?: string; title: string; body?: string }) {
-  const { type } = useTheme();
+/** Empty states speak the same Ionicons language as the rest of the app; an
+ *  emoji here reads as a different design system on an otherwise typeset screen. */
+export function Empty({
+  icon,
+  title,
+  body,
+}: {
+  icon?: keyof typeof Ionicons.glyphMap;
+  title: string;
+  body?: string;
+}) {
+  const { colors, type } = useTheme();
   return (
     <View style={styles.empty}>
-      {icon ? <Text style={{ fontSize: 40 }}>{icon}</Text> : null}
+      {icon ? (
+        <View style={[styles.emptyIcon, { backgroundColor: colors.accentSoft }]}>
+          <Ionicons name={icon} size={26} color={colors.primary} />
+        </View>
+      ) : null}
       <Text style={[type.h2, { textAlign: 'center' }]}>{title}</Text>
-      {body ? <Text style={[type.sub, { textAlign: 'center' }]}>{body}</Text> : null}
+      {body ? (
+        <Text style={[type.sub, { textAlign: 'center', maxWidth: 300 }]}>{body}</Text>
+      ) : null}
     </View>
   );
 }
@@ -160,7 +177,15 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.ui,
   },
   avatarFallback: { alignItems: 'center', justifyContent: 'center' },
-  empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: space.sm, padding: space.xl },
+  empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: space.sm, padding: space.lg },
+  emptyIcon: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: space.xs,
+  },
   badge: {
     borderRadius: radius.full,
     paddingHorizontal: 10,

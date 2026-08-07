@@ -69,7 +69,7 @@ export default function Account() {
     queryClient.invalidateQueries();
     notify(
       'Semester archived',
-      `${data} class${data === 1 ? '' : 'es'} moved to Archived. See you next term 🎓`,
+      `${data} class${data === 1 ? '' : 'es'} moved to Archived. See you next term.`,
     );
   };
 

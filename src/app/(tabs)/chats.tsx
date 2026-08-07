@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
@@ -25,9 +26,14 @@ export default function Chats() {
     }, [queryClient]),
   );
 
+  // Reads as a list row like the Account tab, not a link floating mid-screen.
   const archivedLink = (
-    <Pressable onPress={() => router.push('/chats-archived')} style={styles.archivedLink}>
-      <Text style={type.sub}>Archived chats →</Text>
+    <Pressable
+      onPress={() => router.push('/chats-archived')}
+      style={[styles.archivedRow, { borderTopColor: colors.border }]}>
+      <Ionicons name="archive-outline" size={20} color={colors.subtle} />
+      <Text style={[type.sub, { flex: 1 }]}>Archived chats</Text>
+      <Ionicons name="chevron-forward" size={18} color={colors.subtle} />
     </Pressable>
   );
 
@@ -45,7 +51,7 @@ export default function Chats() {
     return (
       <View style={{ flex: 1, backgroundColor: colors.bg }}>
         <Empty
-          icon="💬"
+          icon="chatbubbles-outline"
           title="No chats yet"
           body="Add classes to join their group chats, or match with a classmate to start a DM."
         />
@@ -71,7 +77,7 @@ export default function Chats() {
               <Avatar uri={item.photo_url} name={item.title} size={48} />
             ) : (
               <View style={[styles.sectionIcon, { backgroundColor: colors.accentSoft }]}>
-                <Text style={{ fontSize: 20 }}>🏫</Text>
+                <Ionicons name="school-outline" size={22} color={colors.primary} />
               </View>
             )}
             <View style={{ flex: 1, gap: 2 }}>
@@ -123,5 +129,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   unreadDot: { width: 10, height: 10, borderRadius: 5 },
-  archivedLink: { padding: space.lg, alignItems: 'center' },
+  archivedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.md,
+    paddingHorizontal: space.lg,
+    paddingVertical: 14,
+    marginTop: space.sm,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
 });

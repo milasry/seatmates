@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -37,9 +38,9 @@ export default function ArchivedChats() {
   if (rows.length === 0) {
     return (
       <Empty
-        icon="📦"
+        icon="archive-outline"
         title="Nothing archived"
-        body="When a semester ends, archive it from the Account tab — class chats move here instead of disappearing."
+        body="When a semester ends, archive it from the Account tab. Class chats move here instead of disappearing."
       />
     );
   }
@@ -52,7 +53,7 @@ export default function ArchivedChats() {
       renderItem={({ item }) => (
         <Pressable onPress={() => router.push(`/chat/${item.id}`)} style={styles.row}>
           <View style={[styles.icon, { backgroundColor: colors.surface }]}>
-            <Text style={{ fontSize: 20 }}>📦</Text>
+            <Ionicons name="archive-outline" size={22} color={colors.subtle} />
           </View>
           <View style={{ flex: 1, gap: 2 }}>
             <Text style={type.body}>{item.title}</Text>

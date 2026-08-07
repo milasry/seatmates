@@ -142,7 +142,7 @@ export default function StudySessionForm() {
       <Text style={type.fine}>
         {edit
           ? 'Everyone who RSVP’d gets a notification about the change.'
-          : 'Everyone enrolled in the course — any section — can see this and RSVP.'}
+          : 'Anyone taking this course can see it and RSVP, whatever section they’re in.'}
       </Text>
     </ScrollView>
   );

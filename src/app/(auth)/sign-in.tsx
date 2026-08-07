@@ -39,7 +39,7 @@ export default function SignIn() {
 
   const validEmail = () => {
     if (!/@columbia\.edu$/.test(cleanEmail())) {
-      setError('Use your @columbia.edu email — that’s the whole point.');
+      setError('Seatmates is Columbia only. Use your @columbia.edu address.');
       return false;
     }
     return true;
@@ -53,7 +53,7 @@ export default function SignIn() {
     const { data: exists } = await supabase.rpc('email_exists', { p_email: cleanEmail() });
     if (exists) {
       setBusy(false);
-      go('signin', 'That email already has an account — sign in below.');
+      go('signin', 'That email already has an account. Sign in below.');
       return;
     }
     const { error: err } = await supabase.auth.signInWithOtp({
@@ -78,7 +78,7 @@ export default function SignIn() {
     if (err) {
       setError(
         /signup|not allowed|not found/i.test(err.message)
-          ? 'No account with that email — create one instead.'
+          ? 'No account with that email yet. Create one instead.'
           : err.message,
       );
     } else {
@@ -99,17 +99,17 @@ export default function SignIn() {
       setError(err.message);
       return;
     }
-    if (next === 'set-password') go('set-password', 'Email verified ✓ — last step.');
+    if (next === 'set-password') go('set-password', 'Email verified. One step left.');
     else router.replace('/');
   };
 
   const savePassword = async () => {
     if (password.length < 8) {
-      setError('At least 8 characters.');
+      setError('Passwords need at least 8 characters.');
       return;
     }
     if (password !== password2) {
-      setError('Passwords don’t match.');
+      setError('Those two passwords don’t match.');
       return;
     }
     setBusy(true);
@@ -132,7 +132,7 @@ export default function SignIn() {
     if (err) {
       setError(
         /invalid/i.test(err.message)
-          ? 'Wrong email or password. Forgot it? Use “email me a code” below.'
+          ? 'That email and password don’t match. Forgot it? Use “email me a code” below.'
           : err.message,
       );
     } else {
@@ -158,7 +158,7 @@ export default function SignIn() {
             <Button title="Create account" onPress={() => go('create-email')} />
             <Button title="Sign in" variant="outline" onPress={() => go('signin')} />
             <Text style={[type.fine, { textAlign: 'center' }]}>
-              Columbia students only — you’ll verify with your @columbia.edu email.
+              Columbia students only. You’ll verify with your @columbia.edu address.
             </Text>
           </>
         )}
@@ -184,7 +184,7 @@ export default function SignIn() {
         {stage === 'code' && (
           <>
             <Field
-              label={`Enter the 6-digit code sent to ${email.trim()}`}
+              label={`We sent a 6-digit code to ${email.trim()}`}
               placeholder="123456"
               inputMode="numeric"
               maxLength={6}
@@ -199,7 +199,7 @@ export default function SignIn() {
               loading={busy}
               disabled={code.length < 6}
             />
-            <Button title="Different email" variant="ghost" onPress={() => go('create-email')} />
+            <Button title="Use a different email" variant="ghost" onPress={() => go('create-email')} />
           </>
         )}
 
@@ -214,14 +214,14 @@ export default function SignIn() {
               autoFocus
             />
             <Field
-              label="Repeat it"
-              placeholder="Same thing again"
+              label="Confirm password"
+              placeholder="Type it once more"
               secureTextEntry
               value={password2}
               onChangeText={setPassword2}
               onSubmitEditing={savePassword}
             />
-            <Button title="Save & continue" onPress={savePassword} loading={busy} />
+            <Button title="Save and continue" onPress={savePassword} loading={busy} />
           </>
         )}
 
@@ -247,7 +247,7 @@ export default function SignIn() {
             <Button title="Sign in" onPress={signInWithPassword} loading={busy} />
             <Pressable onPress={sendSigninCode}>
               <Text style={[type.sub, { color: colors.primary, textAlign: 'center' }]}>
-                Forgot password / no password yet? Email me a code
+                Forgot your password? Email me a code
               </Text>
             </Pressable>
             <Button title="Back" variant="ghost" onPress={() => go('choice')} />
@@ -257,7 +257,7 @@ export default function SignIn() {
         {stage === 'signin-code' && (
           <>
             <Field
-              label={`Enter the 6-digit code sent to ${email.trim()}`}
+              label={`We sent a 6-digit code to ${email.trim()}`}
               placeholder="123456"
               inputMode="numeric"
               maxLength={6}
@@ -273,7 +273,7 @@ export default function SignIn() {
               disabled={code.length < 6}
             />
             <Text style={type.tiny}>
-              Tip: set a password afterwards in Account → Change password.
+              You can set a password later in Account, under Change password.
             </Text>
             <Button title="Back" variant="ghost" onPress={() => go('signin')} />
           </>

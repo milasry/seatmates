@@ -13,7 +13,7 @@ export default function OnboardingSchedule() {
       <CourseManager showDrop={false} />
       <View style={styles.footer}>
         <Button
-          title={count > 0 ? `Done — ${count} class${count === 1 ? '' : 'es'} added` : 'Add at least one class'}
+          title={count > 0 ? `Done, ${count} class${count === 1 ? '' : 'es'} added` : 'Add at least one class'}
           disabled={count === 0}
           onPress={() => router.replace('/(tabs)')}
         />

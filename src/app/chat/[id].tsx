@@ -24,7 +24,7 @@ import { confirm, notify } from '../../lib/dialogs';
 const ICEBREAKERS = [
   'Rate the lecture pace so far: gentle jog or full sprint?',
   'What are you calling this class in your notes app? Be honest.',
-  'Study spot of choice — Butler, Milstein, or somewhere secret?',
+  'Study spot of choice: Butler, Milstein, or somewhere secret?',
   'What made you take this class?',
   'PSet buddy? I bring snacks.',
 ];
@@ -192,7 +192,7 @@ export default function ChatThread() {
             color={colors.subtle}
           />
           <Text style={type.sub}>
-            {info.data?.blocked ? 'This person is blocked' : 'Archived — read-only'}
+            {info.data?.blocked ? 'This person is blocked' : 'Archived, read-only'}
           </Text>
         </View>
       ) : (
@@ -347,7 +347,7 @@ function MembersModal({
                 />
               )}
               {item.relationship === 'friends' && (
-                <Text style={{ color: colors.success, fontWeight: '600' }}>Friends ✓</Text>
+                <Text style={{ color: colors.success, fontWeight: '600' }}>Friends</Text>
               )}
             </View>
           )}

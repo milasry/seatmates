@@ -153,7 +153,7 @@ export default function ProfileViewer() {
       )}
       {rel === 'out_pending' && <Button title="Request sent" variant="outline" disabled onPress={() => {}} />}
       {rel === 'in_pending' && (
-        <Button title="They asked first — respond in Inbox" variant="outline" onPress={() => router.push('/inbox')} />
+        <Button title="They asked first. Respond in Inbox" variant="outline" onPress={() => router.push('/inbox')} />
       )}
       {rel === 'friends' && <Button title="Message" onPress={openDm} />}
 

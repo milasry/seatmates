@@ -119,7 +119,7 @@ export default function Swipe() {
     return (
       <View style={{ flex: 1, backgroundColor: colors.bg }}>
         <Empty
-          icon="🎓"
+          icon="school-outline"
           title="That’s everyone for now"
           body="You’ve seen every classmate in your sections. Add another class, or check back as more people join."
         />
